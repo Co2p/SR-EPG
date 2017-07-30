@@ -1,8 +1,8 @@
 let version = '0.1.2';
 
-self.addEventListener('install', (event) => {
+self.addEventListener('install', (e) => {
   //console.log('WORKER: install event in progress.');
-  event.waitUntil(
+  e.waitUntil(
     caches.open('SREPG' + version).then(function(cache) {
       return cache.addAll([
         '/SR-EPG/css/color.css',
@@ -45,7 +45,7 @@ self.addEventListener('fetch', (e) => {
           console.log('found ' + e );
           return response;
         }
-        return fetch(event.request).then(function(response) {
+        return fetch(e.request).then(function(response) {
           console.log('Response from network is:', response);
           cache.add(response);
           return response;
