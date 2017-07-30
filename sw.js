@@ -10,9 +10,9 @@ self.addEventListener('install', (e) => {
         '/SR-EPG/js/app.js',
         '/SR-EPG/js/lib/handlebars-v4.0.10.js',
         '/SR-EPG/index.html'
-      ]).then(()=>{
-        console.log('cached');
-      });
+      ]);
+    }).then(()=>{
+      console.log('cached');
     });
   );
 });
