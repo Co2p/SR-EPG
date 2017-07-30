@@ -1,4 +1,4 @@
-let version = '0.1.1';
+let version = '0.1.2';
 
 self.addEventListener('install', (event) => {
   //console.log('WORKER: install event in progress.');
