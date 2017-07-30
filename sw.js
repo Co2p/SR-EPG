@@ -47,7 +47,7 @@ self.addEventListener('fetch', (e) => {
         }
         return fetch(e.request).then(function(response) {
           console.log('Response from network is:', response);
-          cache.add(response);
+          caches.add(response);
           return response;
         }).catch(function(error) {
           console.error('Fetching failed:', error);
