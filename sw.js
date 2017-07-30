@@ -47,7 +47,11 @@ self.addEventListener('fetch', (e) => {
         }
         return fetch(e.request).then(function(response) {
           console.log('Response from network is:', response);
-          caches.add(response);
+          caches.open('SREPG' + version).then(function(cache) {
+            return cache.add(response);
+          }).then(()=> {
+            console.log('cached ' + response);
+          })
           return response;
         }).catch(function(error) {
           console.error('Fetching failed:', error);
