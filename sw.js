@@ -1,4 +1,4 @@
-let version = '0.1'
+let version = '0.1';
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
@@ -26,9 +26,9 @@ self.addEventListener('activate', (e) => {
             return caches.delete(cacheName);
           }
         });
-      )
-    })
-  )
+      );
+    });
+  );
 });
 
 self.addEventListener('fetch', (e) => {
