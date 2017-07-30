@@ -42,23 +42,30 @@ self.addEventListener('fetch', (e) => {
     e.respondWith(
       caches.match(e.request).then(function (response) {
         if (response) {
-          console.log('found ' + e );
+          console.log('found ' + response );
           return response;
         }
         return fetch(e.request).then(function(response) {
-          console.log('Response from network is:', response);
           caches.open('SREPG' + version).then(function(cache) {
             return cache.add(response);
           }).then(()=> {
             console.log('cached ' + response);
-          })
+          }).catch(function(error) {
+            console.error('Fetching failed:', error);
+
+            throw error;
+          });
           return response;
         }).catch(function(error) {
           console.error('Fetching failed:', error);
 
           throw error;
         });
-      })
+      }).catch(function(error) {
+        console.error('Fetching failed:', error);
+
+        throw error;
+      });
     )
 
   }
