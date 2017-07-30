@@ -4,13 +4,15 @@ self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open('SR-EPG' + version).then(() => {
       return cache.addAll([
-        'SR-EPG/css/color.css',
-        'SR-EPG/css/layout.css',
-        'SR-EPG/js/templates.js',
-        'SR-EPG/js/app.js',
-        'SR-EPG/js/lib/handlebars-v4.0.10.js',
-        'SR-EPG/index.html'
-      ]);
+        '/SR-EPG/css/color.css',
+        '/SR-EPG/css/layout.css',
+        '/SR-EPG/js/templates.js',
+        '/SR-EPG/js/app.js',
+        '/SR-EPG/js/lib/handlebars-v4.0.10.js',
+        '/SR-EPG/index.html'
+      ]).then(()=>{
+        console.log('cached');
+      });
     });
   );
 });
