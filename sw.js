@@ -65,7 +65,7 @@ self.addEventListener('fetch', (e) => {
         console.error('Fetching failed:', error);
 
         throw error;
-      });
+      })
     )
 
   }
