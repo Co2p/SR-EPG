@@ -20,7 +20,7 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (e) => {
   e.waitUntil(
-    caches.keys().then((cacheNames) => {
+    caches.keys().then(function (cacheNames) {
       return promiseAll(
         cacheNames.filter((cacheName) => {
           if (!/^SREPG/.test(cacheName)) {
