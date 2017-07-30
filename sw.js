@@ -38,6 +38,7 @@ self.addEventListener('fetch', (e) => {
   let requestURL = new URL(e.request.url);
 
   if (requestURL.hostname == 'static-cdn.sr.se') {
+    console.log('static');
     e.respondWith(
       caches.match(e.request).then(function (response) {
         if (response) {
@@ -58,9 +59,9 @@ self.addEventListener('fetch', (e) => {
 
   }
 
-  if(requestURL.hostname == 'api.sr.se') {
+  /*if(requestURL.hostname == 'api.sr.se') {
 
-  }
+  }*/
 
   e.respondWith(
     caches.match(e.request).then(function(response) {
