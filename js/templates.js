@@ -3,4 +3,4 @@ const programTemplate = Handlebars.compile('<program style="width: {{duration}}e
 const channelTemplate = Handlebars.compile('<kanal class="{{id}}"></kanal>');
 const channelIconTemplate = Handlebars.compile('<kanalicon title="{{name}}" id="{{id}}" class="text-light"><p>{{name}}</p><img href="#" onclick="liveaudio(this);return false;" src="{{image}}"></img></kanalicon>')
 
-const liveAudioURL = Handlebars.compile('http://sverigesradio.se/topsy/direkt/{{id}}.mp3')
+const liveAudioURL = Handlebars.compile('https://sverigesradio.se/topsy/direkt/{{id}}.mp3')
