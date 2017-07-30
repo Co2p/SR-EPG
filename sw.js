@@ -21,7 +21,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then(function (cacheNames) {
-      return promiseAll(
+      return Promise.all(
         cacheNames.filter((cacheName) => {
           if (!/^SREPG/.test(cacheName)) {
             return;
