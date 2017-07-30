@@ -1,4 +1,4 @@
-let version = '0.1.2';
+const version = '0.1.2';
 
 self.addEventListener('install', (e) => {
   //console.log('WORKER: install event in progress.');
@@ -62,14 +62,14 @@ self.addEventListener('fetch', (e) => {
     )
 
   }
-
   /*if(requestURL.hostname == 'api.sr.se') {
 
   }*/
-
-  e.respondWith(
-    caches.match(e.request).then(function(response) {
-      return response || fetch(e.request);
-    })
-  );
+  else {
+    e.respondWith(
+      caches.match(e.request).then(function(response) {
+        return response || fetch(e.request);
+      })
+    );
+  }
 });
