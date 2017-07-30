@@ -30,7 +30,9 @@ self.addEventListener('activate', (e) => {
           }
         });
       );
-    });
+    }).then(()=> {
+      console.log('activated');
+    })
   );
 });
 
