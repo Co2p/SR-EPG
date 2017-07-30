@@ -100,7 +100,7 @@ setInterval(function() {
 }, 10000);
 
 if('serviceWorker' in navigator) {
-  navigator.serviceWorker.register("https://co2p.github.io/SR-EPG").then(function (reg) {
+  navigator.serviceWorker.register("https://co2p.github.io/SR-EPG/sw.js").then(function (reg) {
     console.log('serviceWorker online');
   }).catch(function (err) {
 
