@@ -3,7 +3,7 @@ const sidebar = $('sidebar');
 let channels = [];
 let lokalaKanaler = [];
 const lokalKanal = "P4 Stockholm";
-$.getJSON("https://api.sr.se/api/v2/channels?format=json&pagination=false", function(data) {
+$.getJSON(channelsURL, function(data) {
   //console.log(data);
   for (var i in data.channels) {
     let channel = data.channels[i];

@@ -38,8 +38,28 @@ self.addEventListener('fetch', (e) => {
   let requestURL = new URL(e.request.url);
 
   if (requestURL.hostname == 'static-cdn.sr.se') {
-    console.log('saved a bit of bandwidth');
-    return caches.match(e.request);
+    e.respondWith(
+      caches.match(e.request).then(function (response) {
+        if (response) {
+          console.log('found ' + e );
+          return response;
+        }
+        return fetch(event.request).then(function(response) {
+          console.log('Response from network is:', response);
+          cache.add(response);
+          return response;
+        }).catch(function(error) {
+          console.error('Fetching failed:', error);
+
+          throw error;
+        });
+      })
+    )
+
+  }
+
+  if(requestURL.hostname == 'api.sr.se') {
+
   }
 
   e.respondWith(
