@@ -91,6 +91,7 @@ timeindicator {
   top: 3.6em;
   position: absolute;
   height: 140%;
+  margin-right: 50em;
   border-right: 5px solid rgba(255, 0, 0, 0.5);
   box-shadow: 0 0 14px 0px rgba(0, 0, 0, 0.6);
 }

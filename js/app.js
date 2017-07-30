@@ -1,14 +1,18 @@
 const content = $('content');
 const sidebar = $('sidebar');
 let channels = [];
-const lokalKanal = "Göteborg";
+let lokalaKanaler = [];
+const lokalKanal = "P4 Stockholm";
 $.getJSON("https://api.sr.se/api/v2/channels?format=json&pagination=false", function(data) {
   //console.log(data);
   for (var i in data.channels) {
     let channel = data.channels[i];
     if (channel.scheduleurl != undefined) {
       //setup a searchable JSON
-      if (!channel.name.match("(?:P4).+") || channel.name.match("(!?P4)." + lokalKanal )) {
+      if (channel.name.match("(!?P4).")) {
+        lokalaKanaler.push(channel.name);
+      }
+      if (!channel.name.match("(?:P4).+") || channel.name.match(lokalKanal)) {
         channel.name = channel.name;
         channel.id = channel.id;
         channel.channeltype = channel.channeltype;
@@ -59,6 +63,7 @@ $.getJSON("https://api.sr.se/api/v2/channels?format=json&pagination=false", func
       }
     }
   }
+  console.log(lokalaKanaler);
 });
 
 
