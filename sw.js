@@ -28,10 +28,8 @@ self.addEventListener('activate', (e) => {
           } else {
             return caches.delete(cacheName);
           }
-        });
+        })
       );
-    }).then(()=> {
-      console.log('activated');
     })
   );
 });

@@ -78,10 +78,14 @@ function makeSSL(link) {
   return link.replace('http://', 'https://');
 }
 
+function scrollToNow() {
+  $('body, html').animate({ scrollLeft: parseFloat($('timeindicator').css('width'))}, 100).animate({scrollLeft: parseFloat($('timeindicator').css('width')) + parseFloat($(window).width())/500 + 'px'}, 1000);
+}
+
 var d = new Date(), e = new Date(d);
 var msSinceMidnight = e - d.setHours(0,0,0,0);
-content.append('<timeindicator style="width:' + msSinceMidnight / 100000 + 'em"></timeindicator>');
-$('body, hmtl').animate({ scrollLeft: $('timeindicator').width}, 100);
+content.append('<timeindicator style="height:' + $(document).height() +';width:' + msSinceMidnight / 100000 + 'em;"></timeindicator>');
+scrollToNow();
 
 setInterval(function() {
   var d = new Date(), e = new Date(d);

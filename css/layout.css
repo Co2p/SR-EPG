@@ -31,7 +31,7 @@ sidebar {
   height: 100%;
   top: 0;
   left: 0;
-  margin: 3.6em 0em 0em 0em;
+  margin: 3.5em 0em 0em 0em;
 }
 
 kanalicon {
@@ -90,7 +90,7 @@ starttime {
 timeindicator {
   top: 3.6em;
   position: absolute;
-  height: 120%;
+  height: 140%;
   border-right: 5px solid rgba(255, 0, 0, 0.5);
   box-shadow: 0 0 14px 0px rgba(0, 0, 0, 0.6);
 }
