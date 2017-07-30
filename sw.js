@@ -2,7 +2,7 @@ let version = '0.1';
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open('SR-EPG' + version).then(() => {
+    caches.open('SR-EPG' + version).then((cache) => {
       return cache.addAll([
         '/SR-EPG/css/color.css',
         '/SR-EPG/css/layout.css',
