@@ -1,0 +1,38 @@
+.black {
+  background: #000;
+  color: #c8d9f1;
+}
+
+.dark {
+  background: #06162d;
+  color: #c8d9f1;
+}
+
+.dark-transparent {
+  background: rgba(6, 22, 45, 0.75);
+  color: #c8d9f1;
+}
+
+.light {
+  background: #c8d9f1;
+  color: #06162d;
+}
+
+.white {
+  background: #fff;
+  color: #06162d;
+}
+
+.primary {
+  background: #c31480;
+  color: #c8d9f1;
+}
+
+.secondary {
+  background: #5184ad;
+  color: #c8d9f1;
+}
+
+.text-light {
+  color: #c8d9f1;
+}
