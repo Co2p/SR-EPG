@@ -1,8 +1,9 @@
 let version = '0.1';
 
-self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open('SR-EPG' + version).then((cache) => {
+self.addEventListener('install', (event) => {
+  //console.log('WORKER: install event in progress.');
+  event.waitUntil(
+    caches.open('SREPG' + version).then(function(cache) {
       return cache.addAll([
         '/SR-EPG/css/color.css',
         '/SR-EPG/css/layout.css',
@@ -11,9 +12,9 @@ self.addEventListener('install', (e) => {
         '/SR-EPG/js/lib/handlebars-v4.0.10.js',
         '/SR-EPG/index.html'
       ]);
-    }).then(()=>{
-      console.log('cached');
-    });
+    }).then(()=> {
+      console.log('WORKER: install ' + version +' completed');
+    })
   );
 });
 
@@ -22,7 +23,7 @@ self.addEventListener('activate', (e) => {
     caches.keys().then((cacheNames) => {
       return promiseAll(
         cacheNames.filter((cacheName) => {
-          if (!/^SR-EPG/.test(cacheName)) {
+          if (!/^SREPG/.test(cacheName)) {
             return;
           } else {
             return caches.delete(cacheName);
