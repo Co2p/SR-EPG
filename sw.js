@@ -1,4 +1,4 @@
-let version = '0.1';
+let version = '0.1.1';
 
 self.addEventListener('install', (event) => {
   //console.log('WORKER: install event in progress.');
@@ -35,7 +35,7 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-  let requestURL = new URL(event.request.url);
+  let requestURL = new URL(e.request.url);
 
   if (requestURL.hostname == 'static-cdn.sr.se') {
     console.log('saved a bit of bandwidth');
