@@ -108,6 +108,7 @@ function programInfo(e) {
     let animationDone = false;
     if ($(e).find('detail').length == 0) {
       $.getJSON(episodeURL({'id': $(e.parentElement).attr('id')})).then(function (data) {
+        data.episode.imageurl = makeSSL(data.episode.imageurl);
         $(e).append(programDetailTemplate(data.episode));
         $(e).find('detail').hide();
         if (animationDone) {
