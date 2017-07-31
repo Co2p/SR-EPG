@@ -36,3 +36,11 @@
 .text-light {
   color: #c8d9f1;
 }
+
+.program-info p {
+  color: #fff;
+}
+
+detail p {
+  color: #000 !important;
+}

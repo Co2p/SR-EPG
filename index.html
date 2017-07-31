@@ -7,8 +7,10 @@
   <!--Material design goodies:-->
   <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
   <script src="js/lib/handlebars-v4.0.10.js"></script>
+  <script src="js/lib/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="css/color.css">
   <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/layout-media.css">
   <script defer src="js/templates.js"></script>
 
   <!--set page color and scaling fix-->
@@ -40,5 +42,13 @@
   </script>
   <script defer src="js/app.js"></script>
   <script defer src="js/audio.js"></script>
+  <script>
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register("https://co2p.github.io/SR-EPG/sw.js").then(function (reg) {
+      console.log('serviceWorker online');
+    }).catch(function (err) {
+
+    });
+  }</script>
 </body>
 </html>

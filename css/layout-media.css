@@ -1,0 +1,33 @@
+@media (max-width: 768px) {
+  detail {
+    padding: 13em 1em 1em 1em;
+  }
+
+  .program-info {
+    margin: 0;
+  }
+}
+
+@media (max-width: 425px) {
+  detail img {
+    height: 10em;
+    width: 10em;
+    top: 7em;
+    right: 2em;
+  }
+}
+
+@media (max-width: 357px) {
+  .program-info {
+    padding: 0;
+  }
+
+  detail img {
+    top: 6em;
+    right: 1em;
+  }
+}
+
+@media (max-width: 320px) {
+
+}

@@ -57,6 +57,10 @@ kanalicon img:hover{
   opacity: 0.5;
 }
 
+.playing {
+  visibility: hidden;
+}
+
 kanal {
   display: flex;
   flex-direction: row;
@@ -74,7 +78,7 @@ program div {
   height: 3em;
   font-size: 1.2em;
   margin: 0.1em;
-  padding: 0.4em 0em;
+  padding: 0.4em 0 0 0.4em;
   white-space: nowrap;
   overflow:hidden;
 }
@@ -83,11 +87,74 @@ program div p {
   margin: 0;
 }
 
-starttime {
+detail {
+  display: flex;
+  flex-direction: column;
+  white-space: normal;
+  background: white;
+  padding: 1em 14em 1em 1em;
+}
+
+detail img {
+  height: 12em;
+  width: 12em;
+  position: absolute;
+  top: 4em;
+  right: 2em;
+  box-shadow: 0em 0.01em 3px rgba(0, 0, 0, 0.5);
+}
+
+detail p {
+  width: 19em;
+  font-size: 0.8em !important;
+}
+
+description {
+  padding: 0.5em;
+}
+
+text {
+  padding-top: 1em;
+}
+
+.program-info {
+  margin: 2em;
+  padding: 1em;
+  opacity: 1;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: inherit;
+  z-index: 1000;
+  box-shadow: 0.1em 0.1em 2em 0px black;
+  overflow-y: auto;
+}
+
+.program-info p {
+  font-size: 2em;
+  margin: 0.2em;
+}
+
+.program-info timetext {
+  font-size: 1em;
+}
+
+.program-info .endtime {
+  visibility: visible;
+}
+
+timetext {
   font-size: 0.6em;
 }
 
+.endtime {
+  visibility: hidden;
+}
+
 timeindicator {
+  pointer-events: none;
   top: 3.6em;
   position: absolute;
   height: 140%;
