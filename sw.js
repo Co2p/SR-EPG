@@ -49,7 +49,7 @@ self.addEventListener('fetch', function(event) {
         return response;
       })
     } else {
-      return response;
+      return response || fetch(event.request);
     }
   })
 );
