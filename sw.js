@@ -38,35 +38,35 @@ self.addEventListener('fetch', (e) => {
   let requestURL = new URL(e.request.url);
 
   if (requestURL.hostname == 'static-cdn.sr.se') {
-    e.respondWith(
-      caches.match(e.request).then(function (response) {
-        if (response) {
-          console.log('found ' + response );
+    caches.match(e.request).then(function (response) {
+      if (response) {
+        console.log('found ' + response );
+        e.respondWith(
           return response;
-        }
-        else {
-          fetch(requestURL, { mode: 'no-cors' }).then(function(response) {
-            caches.open('SREPG' + version).then(function(cache) {
-              cache.add(e.request);
-            }).then(() => {
-              console.log('cached ' + requestURL);
-            }).catch(function(error) {
-              console.error('Fetching failed:', error);
-              throw error;
-            });
-            return response;
+        );
+      }
+      else {
+        fetch(requestURL, { mode: 'no-cors' }).then(function(response) {
+          caches.open('SREPG' + version).then(function(cache) {
+            cache.add(e.request);
+          }).then(() => {
+            console.log('cached ' + requestURL);
           }).catch(function(error) {
             console.error('Fetching failed:', error);
-
             throw error;
           });
-        }
-      }).catch(function(error) {
-        console.error('Fetching failed:', error);
+          return response;
+        }).catch(function(error) {
+          console.error('Fetching failed:', error);
 
-        throw error;
-      })
-    )
+          throw error;
+        });
+      }
+    }).catch(function(error) {
+      console.error('Fetching failed:', error);
+
+      throw error;
+    })
 
   }
 
