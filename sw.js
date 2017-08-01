@@ -49,8 +49,6 @@ self.addEventListener('fetch', function(event) {
     } else {
       return response;
     }
-  }).catch(function() {
-    console.log('error?');
-  });
+  })
 );
 });
