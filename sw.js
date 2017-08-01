@@ -55,4 +55,5 @@ self.addEventListener('fetch', function(event) {
   }).catch(function() {
     console.log('error?');
   });
+)
 });
