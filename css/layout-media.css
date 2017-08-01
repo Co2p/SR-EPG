@@ -15,6 +15,14 @@
     top: 7em;
     right: 2em;
   }
+
+  .sidebar {
+    width: 5em;
+  }
+
+  kanalicon p {
+    visibility: hidden;
+  }
 }
 
 @media (max-width: 357px) {
@@ -25,6 +33,10 @@
   detail img {
     top: 6em;
     right: 1em;
+  }
+
+  kanalicon {
+    width: 4em;
   }
 }
 
