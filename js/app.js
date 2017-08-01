@@ -116,8 +116,6 @@ function programInfo(e) {
         }
       }).catch((err) => {
         $(e).append(programDetailTemplate({'title': 'Ingen info'}));
-      }).finally(() => {
-        console.log('finally');
       })
     }
 
