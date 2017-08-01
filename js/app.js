@@ -107,7 +107,8 @@ function programInfo(e) {
     }
     let animationDone = false;
     if ($(e).find('detail').length == 0) {
-      $.getJSON(episodeURL({'id': $(e.parentElement).attr('id')})).then(function (data) {
+      $.getJSON(episodeURL({'id': $(e.parentElement).attr('eid')})).then(function (data) {
+        console.log(data);
         data.episode.imageurl = makeSSL(data.episode.imageurl);
         $(e).append(programDetailTemplate(data.episode));
         $(e).find('detail').hide();
@@ -115,8 +116,21 @@ function programInfo(e) {
           $(e).find('detail').fadeIn();
         }
       }).catch((err) => {
-        $(e).append(programDetailTemplate({'title': 'Ingen info'}));
-      })
+        $.getJSON(programURL({'id': $(e.parentElement).attr('pid')})).then(function (data) {
+          console.log(data);
+          data.imageurl = makeSSL(data.programimage);
+          data.title = data.name;
+          data.description = data.program.description;
+          $(e).append(programDetailTemplate(data));
+          $(e).find('detail').hide();
+          if (animationDone) {
+            $(e).find('detail').fadeIn();
+          }
+        }).catch((err)=> {
+          console.log('404');
+          $(e).append(programDetailTemplate({'description': 'Ingen information'}));
+        });
+      });
     }
 
     let offset = $(e).offset();
@@ -147,7 +161,8 @@ setInterval(function() {
   $('.fadedprogram').promise().done(function (faded) {
     const currTime = readableTime(new Date());
     for (var i = 0; faded.length > i; i++) {
-      if (currTime >= $(faded[i]).find('timetext').text()) {
+      if (currTime >= $(faded[i]).find('.starttime').text()) {
+        console.log($(faded[i]).find('.starttime').text());
         $(faded[i]).css('opacity', 0.5);
         $(faded[i]).removeClass('fadedprogram');
         $(faded[i]).animate({opacity: 1}, 500)
