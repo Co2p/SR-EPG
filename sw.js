@@ -36,42 +36,39 @@ self.addEventListener('activate', (e) => {
 
 self.addEventListener('fetch', (e) => {
   let requestURL = new URL(e.request.url);
+  e.respondWith(
 
-  if (requestURL.hostname == 'static-cdn.sr.se') {
-    caches.match(e.request).then(function (response) {
-      console.log(response);
-      if (response) {
-        console.log('found ' + response );
-        e.respondWith(
+    if (requestURL.hostname == 'static-cdn.sr.se') {
+      caches.match(e.request).then(function (response) {
+        console.log(response);
+        if (response) {
+          console.log('found ' + response );
           return response;
-        );
-      }
-      else {
-        fetch(requestURL, { mode: 'no-cors' }).then(function(response) {
-          caches.open('SREPG' + version).then(function(cache) {
-            cache.add(e.request);
-          }).then(() => {
-            console.log('cached ' + requestURL);
+        }
+        else {
+          fetch(requestURL, { mode: 'no-cors' }).then(function(response) {
+            caches.open('SREPG' + version).then(function(cache) {
+              cache.add(e.request);
+            }).then(() => {
+              console.log('cached ' + requestURL);
+            }).catch(function(error) {
+              console.error('Fetching failed:', error);
+              throw error;
+            });
+            return response;
           }).catch(function(error) {
             console.error('Fetching failed:', error);
+
             throw error;
           });
-          return response;
-        }).catch(function(error) {
-          console.error('Fetching failed:', error);
+        }
+      }).catch(function(error) {
+        console.error('Fetching failed:', error);
 
-          throw error;
-        });
-      }
-    }).catch(function(error) {
-      console.error('Fetching failed:', error);
+        throw error;
+      })
 
-      throw error;
-    })
-
-  }
-
-  e.respondWith(
+    }
     caches.match(e.request).then(function(response) {
       return response || fetch(e.request);
     })
