@@ -45,15 +45,12 @@ self.addEventListener('fetch', function(event) {
           cache.put(event.request, responseClone);
         });
         return response;
-      }).catch(function () {
-        console.log('sw 404');
-        return;
-      });
+      })
     } else {
       return response;
     }
   }).catch(function() {
     console.log('error?');
   });
-)
+);
 });
