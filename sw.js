@@ -38,29 +38,29 @@ self.addEventListener('fetch', (e) => {
   let requestURL = new URL(e.request.url);
 
   if (requestURL.hostname == 'static-cdn.sr.se') {
-    console.log('static');
     e.respondWith(
       caches.match(e.request).then(function (response) {
         if (response) {
           console.log('found ' + response );
           return response;
         }
-        return fetch(e.request).then(function(response) {
-          caches.open('SREPG' + version).then(function(cache) {
-            cache.put(e.request, response);
-          }).then(()=> {
-            console.log('cached ' + response);
+        else {
+          fetch(requestURL).then(function(response) {
+            caches.open('SREPG' + version).then(function(cache) {
+              cache.add(e.request);
+            }).then(() => {
+              console.log('cached ' + requestURL);
+            }).catch(function(error) {
+              console.error('Fetching failed:', error);
+              throw error;
+            });
+            return response;
           }).catch(function(error) {
             console.error('Fetching failed:', error);
 
             throw error;
           });
-          return response;
-        }).catch(function(error) {
-          console.error('Fetching failed:', error);
-
-          throw error;
-        });
+        }
       }).catch(function(error) {
         console.error('Fetching failed:', error);
 
@@ -69,14 +69,11 @@ self.addEventListener('fetch', (e) => {
     )
 
   }
-  /*if(requestURL.hostname == 'api.sr.se') {
 
-  }*/
-  else {
-    e.respondWith(
-      caches.match(e.request).then(function(response) {
-        return response || fetch(e.request);
-      })
-    );
-  }
+  e.respondWith(
+    caches.match(e.request).then(function(response) {
+      return response || fetch(e.request);
+    })
+  );
+
 });
