@@ -39,11 +39,10 @@ self.addEventListener('fetch', function(event) {
 
   event.respondWith(caches.match(event.request).then(function(response) {
     if (requestURL.hostname == 'static-cdn.sr.se') {
-      console.log('static');
       return fetch(event.request).then(function (response) {
         let responseClone = response.clone();
         caches.open(swcache).then(function (cache) {
-
+          console.log(response.clone());
           cache.put(event.request, responseClone);
         });
         return response;
