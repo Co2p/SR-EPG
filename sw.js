@@ -39,6 +39,7 @@ self.addEventListener('fetch', (e) => {
 
   if (requestURL.hostname == 'static-cdn.sr.se') {
     caches.match(e.request).then(function (response) {
+      console.log(response);
       if (response) {
         console.log('found ' + response );
         e.respondWith(
