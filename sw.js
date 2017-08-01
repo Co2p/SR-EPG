@@ -35,20 +35,21 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', function(event) {
-  event.respondWith(caches.match(event.request).then(function(response) {
-    console.log(event.request.url);
-    if (event.request.url == 'static-cdn.sr.se') {
-      console.log('static');
-      return fetch(event.request).then(function (response) {
-        let responseClone = response.clone();
-        caches.open(swcache).then(function (cache) {
-          cache.put(event.request, responseClone);
-        });
+  if (event.request.url == 'static-cdn.sr.se') {
+    event.respondWith(caches.match(event.request).then(function(response) {
+      if (event.request.url == 'static-cdn.sr.se') {
+        console.log('static');
+        return fetch(event.request).then(function (response) {
+          let responseClone = response.clone();
+          caches.open(swcache).then(function (cache) {
+            cache.put(event.request, responseClone);
+          });
+          return response;
+        })
+      } else {
         return response;
-      })
-    } else {
-      return response;
-    }
-  })
-);
+      }
+    })
+  );
+}
 });
