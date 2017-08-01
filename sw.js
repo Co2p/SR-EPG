@@ -52,5 +52,7 @@ self.addEventListener('fetch', function(event) {
     } else {
       return response;
     }
-  }));
+  }).catch() {
+    console.log('error?');
+  });
 });
