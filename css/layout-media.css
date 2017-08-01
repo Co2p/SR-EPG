@@ -20,6 +20,10 @@
     width: 5em;
   }
 
+  kanalicon {
+    width: 4em;
+  }
+
   kanalicon p {
     visibility: hidden;
   }
@@ -33,10 +37,6 @@
   detail img {
     top: 6em;
     right: 1em;
-  }
-
-  kanalicon {
-    width: 4em;
   }
 }
 

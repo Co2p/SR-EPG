@@ -47,10 +47,15 @@ kanalicon {
   display: flex;
   flex-direction: row;
   left: 0px;
-  margin-bottom: 0.95em;
+  margin-bottom: 1.3em;
   justify-content: flex-end;
   width: 10em;
   z-index: 999;
+}
+
+kanalicon p {
+  margin: 0;
+  align-self: center;
 }
 
 kanalicon img {
@@ -58,8 +63,6 @@ kanalicon img {
   height: 3em;
   margin-left: 0.5em;
 }
-
-
 
 kanalicon img:hover{
   opacity: 0.5;
