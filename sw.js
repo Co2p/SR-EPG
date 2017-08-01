@@ -1,4 +1,4 @@
-const version = '0.1.2';
+const version = '0.1.3';
 
 self.addEventListener('install', (e) => {
   //console.log('WORKER: install event in progress.');
@@ -45,7 +45,7 @@ self.addEventListener('fetch', (e) => {
           return response;
         }
         else {
-          fetch(requestURL).then(function(response) {
+          fetch(requestURL, { mode: 'no-cors' }).then(function(response) {
             caches.open('SREPG' + version).then(function(cache) {
               cache.add(e.request);
             }).then(() => {
