@@ -41,7 +41,7 @@ self.addEventListener('fetch', function(event) {
     if (requestURL.hostname == 'static-cdn.sr.se') {
       caches.open(swcache).then(function (cache) {
         return fetch(event.request).then(function (cresponse) {
-          cache.put(event.request, cresponse.clone(););
+          cache.put(event.request, cresponse.clone());
           return cresponse;
         })
       });
