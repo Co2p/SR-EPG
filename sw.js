@@ -36,9 +36,7 @@ self.addEventListener('activate', (e) => {
 
 self.addEventListener('fetch', function(event) {
   event.respondWith(caches.match(event.request).then(function(response) {
-    if (response !== undefined) {
-      return response;
-    } else if (event.request.url == 'static-cdn.sr.se') {
+    if (event.request.url == 'static-cdn.sr.se') {
       return fetch(event.request).then(function (response) {
         let responseClone = response.clone();
 
@@ -50,6 +48,8 @@ self.addEventListener('fetch', function(event) {
         console.log('sw 404');
         return;
       });
+    } else {
+      return response;
     }
   }));
 });
