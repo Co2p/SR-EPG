@@ -1,6 +1,6 @@
 const programTemplatePics = Handlebars.compile('<program style="width: {{duration}}em;"><div title="{{program.name}}" style="{{#if imageurl}}background: url({{imageurl}});{{/if}}{{#unless imageurl}}background: {{channelcolor}};{{/unless}}background-size: cover;">{{title}}</div></program>');
 const programTemplate = Handlebars.compile('<program id="{{episodeid}}" style="width: {{duration}}em;" {{#if fade}}class="fadedprogram"{{/if}}><div href="#" onclick="programInfo(this);return false;" title="{{program.name}}" style="background: {{channelcolor}};"><p>{{title}}</p><timetext class="starttime text-light">{{starttime}}</timetext><timetext class="endtime text-light"> - {{endtime}}</timetext></div></program>');
-const programDetailTemplate = Handlebars.compile('<detail><img src="{{imageurl}}"/><p>{{title}}</p><description>{{description}}</description><text>{{text}}</text></detail>')
+const programDetailTemplate = Handlebars.compile('<detail>{{#if imageurl}}<img src="{{imageurl}}"/>{{/if}}<p>{{title}}</p><description>{{description}}</description><text>{{text}}</text></detail>')
 const channelTemplate = Handlebars.compile('<kanal class="{{id}}"></kanal>');
 const channelIconTemplate = Handlebars.compile('<kanalicon title="{{name}}" id="{{id}}" class="text-light"><p>{{name}}</p><img class="icon" href="#" onclick="liveaudio(this);return false;" src="{{image}}"></img></kanalicon>')
 
