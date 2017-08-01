@@ -38,7 +38,9 @@ self.addEventListener('fetch', function(event) {
   var requestURL = new URL(event.request.url);
 
   event.respondWith(caches.match(event.request).then(function(response) {
-    if (requestURL.hostname == 'static-cdn.sr.se') {
+    if (response.body) {
+      return response;
+    } else if (requestURL.hostname == 'static-cdn.sr.se') {
       caches.open(swcache).then(function (cache) {
         return fetch(event.request).then(function (cresponse) {
           cache.put(event.request, cresponse.clone());
