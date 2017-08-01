@@ -115,7 +115,9 @@ function programInfo(e) {
           $(e).find('detail').fadeIn();
         }
       }).catch((err) => {
-        console.log(e);
+        $(e).append(programDetailTemplate({'title': 'Ingen info'}));
+      }).finally(() => {
+        console.log('finally');
       })
     }
 
