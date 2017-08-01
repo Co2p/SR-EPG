@@ -39,14 +39,12 @@ self.addEventListener('fetch', function(event) {
 
   event.respondWith(caches.match(event.request).then(function(response) {
     if (requestURL.hostname == 'static-cdn.sr.se') {
-      return fetch(event.request).then(function (response) {
-        let responseClone = response.clone();
-        caches.open(swcache).then(function (cache) {
-          cache.put(event.request, responseClone);
-          console.log(responseClone);
-        });
-        return response;
-      })
+      caches.open(swcache).then(function (cache) {
+        return fetch(event.request).then(function (cresponse) {
+          cache.put(event.request, cresponse.clone(););
+          return cresponse;
+        })
+      });
     } else {
       return response || fetch(event.request);
     }
