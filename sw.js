@@ -47,7 +47,7 @@ self.addEventListener('fetch', (e) => {
         }
         return fetch(e.request).then(function(response) {
           caches.open('SREPG' + version).then(function(cache) {
-            cache.put(request, response);
+            cache.put(e.request, response);
           }).then(()=> {
             console.log('cached ' + response);
           }).catch(function(error) {
