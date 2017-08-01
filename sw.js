@@ -37,22 +37,20 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', function(event) {
   var requestURL = new URL(event.request.url);
 
-  if (requestURL.hostname == 'static-cdn.sr.se') {
-    console.log(event.request);
-    event.respondWith(caches.match(event.request).then(function(response) {
-      if (requestURL.hostname == 'static-cdn.sr.se') {
-        console.log('static');
-        return fetch(event.request).then(function (response) {
-          let responseClone = response.clone();
-          caches.open(swcache).then(function (cache) {
-            cache.put(event.request, responseClone);
-          });
-          return response;
-        })
-      } else {
+  event.respondWith(caches.match(event.request).then(function(response) {
+    if (requestURL.hostname == 'static-cdn.sr.se') {
+      console.log('static');
+      return fetch(event.request).then(function (response) {
+        let responseClone = response.clone();
+        caches.open(swcache).then(function (cache) {
+
+          cache.put(event.request, responseClone);
+        });
         return response;
-      }
-    })
-  );
-}
+      })
+    } else {
+      return response;
+    }
+  })
+);
 });
