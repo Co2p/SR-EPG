@@ -1,0 +1,27 @@
+{
+  "short_name": "SR EPG",
+  "name": "Sveriges Radio - Tablå",
+  "icons": [
+    {
+      "src": "img/ic_fav.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+    "src": "img/ic_apple.png",
+    "type": "image/png",
+    "sizes": "152x152"
+  }, {
+    "src": "img/ic_ms.png",
+    "type": "image/png",
+    "sizes": "144x144"
+  }, {
+    "src": "img/ic_touch.png",
+    "type": "image/png",
+    "sizes": "192x192"
+  }],
+  "display": "standalone",
+  "theme_color": "#0065bd",
+  "background_color": "#0065bd",
+  "start_url": "index.html"
+}

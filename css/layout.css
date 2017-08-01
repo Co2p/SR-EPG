@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: 'Avenir', sans-serif;
+  pointer-events: none;
 }
 
 nav {
@@ -11,6 +12,7 @@ nav {
   top: 0;
   left: 0;
   z-index: 1000;
+  pointer-events: auto;
 }
 
 nav h {
@@ -19,27 +21,33 @@ nav h {
 }
 
 content {
-  margin: 4.3em 1em 1em 11.5em; /*compensating for the fixed header*/
+  margin: 6.4em 1em 0 11.5em; /*compensating for the fixed header*/
+  pointer-events: auto;
   display: inline-flex;
   flex-direction: column;
+  position: absolute;
+  top: 0;
 }
 
-sidebar {
+.sidebar {
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 3.45em;
   width: 11em;
   box-shadow: 0em 0.01em 3px rgba(0, 0, 0, 0.5);
-  position: fixed;
-  height: 100%;
+  position: sticky;
   top: 0;
   left: 0;
-  margin: 3.5em 0em 0em 0em;
+  margin: -2.4em 0 0 0;
+  z-index: 1;
 }
 
 kanalicon {
   display: flex;
   flex-direction: row;
   left: 0px;
-  margin-top: 0.8em;
-  position: absolute;
+  margin-bottom: 0.95em;
   justify-content: flex-end;
   width: 10em;
   z-index: 999;
@@ -78,7 +86,7 @@ program div {
   height: 3em;
   font-size: 1.2em;
   margin: 0.1em;
-  padding: 0.4em 0 0 0.4em;
+  padding: 0.4em 0 0 0.2em;
   white-space: nowrap;
   overflow:hidden;
 }
@@ -153,16 +161,27 @@ timetext {
   visibility: hidden;
 }
 
-timeindicator {
+.timeindicator {
   pointer-events: none;
-  top: 3.6em;
   position: absolute;
-  height: 140%;
-  margin-right: 50em;
+  top: 0;
+  bottom: 0;
   border-right: 5px solid rgba(255, 0, 0, 0.5);
   box-shadow: 0 0 14px 0px rgba(0, 0, 0, 0.6);
 }
 
 .fadedprogram {
   opacity: 0.5;
+}
+
+.timebar {
+  height: 3em;
+  display: flex;
+  padding-top: 3em;
+  margin-left: 11.5em;
+  box-shadow: 0 0 0.2em rgba(0,0,0,0.5);
+}
+
+.daywidth {
+  width: 864em;
 }

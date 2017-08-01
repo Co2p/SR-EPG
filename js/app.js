@@ -1,5 +1,5 @@
 const content = $('content');
-const sidebar = $('sidebar');
+const sidebar = $('.sidebar');
 let channels = [];
 let programs = {};
 let lokalaKanaler = [];
@@ -36,7 +36,7 @@ function build(channel) {
     content.append(channelTemplate(channel));
     const guide = $('.' + channel.id);
     let timeNow = new Date();
-    guide.append(channelIconTemplate(channel));
+    sidebar.append(channelIconTemplate(channel));
 
     let color = "#0065bd";
     color = channel.color;
@@ -78,7 +78,7 @@ function makeSSL(link) {
 }
 
 function scrollToNow() {
-  $('body, html').animate({ scrollLeft: parseFloat($('timeindicator').css('width'))}, 100).animate({scrollLeft: parseFloat($('timeindicator').css('width')) + parseFloat($(window).width())/500 + 'px'}, 1000);
+  $('body, html').animate({ scrollLeft: parseFloat($('.timeindicator').css('width'))}, 100).animate({scrollLeft: parseFloat($('.timeindicator').css('width')) + parseFloat($(window).width())/500 + 'px'}, 1000);
 }
 
 function disableScroll() {
@@ -136,13 +136,13 @@ function programInfo(e) {
 
 var d = new Date(), e = new Date(d);
 var msSinceMidnight = e - d.setHours(0,0,0,0);
-content.append('<timeindicator style="height:' + $(document).height() +';width:' + msSinceMidnight / 100000 + 'em;"></timeindicator>');
+content.append('<div class="timeindicator" style=";width:' + msSinceMidnight / 100000 + 'em;"></div>');
 scrollToNow();
 
 setInterval(function() {
   var d = new Date(), e = new Date(d);
   var msSinceMidnight = e - d.setHours(0,0,0,0);
-  $('timeindicator').css('width', msSinceMidnight / 100000 + 'em');
+  $('.timeindicator').css('width', msSinceMidnight / 100000 + 'em');
 
   $('.fadedprogram').promise().done(function (faded) {
     const currTime = readableTime(new Date());
