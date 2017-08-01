@@ -1,9 +1,9 @@
 const version = '0.1.3';
-
+const swcache = 'SREPG' + version;
 self.addEventListener('install', (e) => {
   //console.log('WORKER: install event in progress.');
   e.waitUntil(
-    caches.open('SREPG' + version).then(function(cache) {
+    caches.open(swcache).then(function(cache) {
       return cache.addAll([
         '/SR-EPG/css/color.css',
         '/SR-EPG/css/layout.css',
@@ -34,44 +34,22 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-self.addEventListener('fetch', (e) => {
-  let requestURL = new URL(e.request.url);
-  e.respondWith(
+self.addEventListener('fetch', function(event) {
+  event.respondWith(caches.match(event.request).then(function(response) {
+    if (response !== undefined) {
+      return response;
+    } else if (event.request.url == 'static-cdn.sr.se') {
+      return fetch(event.request).then(function (response) {
+        let responseClone = response.clone();
 
-    if (requestURL.hostname == 'static-cdn.sr.se') {
-      caches.match(e.request).then(function (response) {
-        console.log(response);
-        if (response) {
-          console.log('found ' + response );
-          return response;
-        }
-        else {
-          fetch(requestURL, { mode: 'no-cors' }).then(function(response) {
-            caches.open('SREPG' + version).then(function(cache) {
-              cache.add(e.request);
-            }).then(() => {
-              console.log('cached ' + requestURL);
-            }).catch(function(error) {
-              console.error('Fetching failed:', error);
-              throw error;
-            });
-            return response;
-          }).catch(function(error) {
-            console.error('Fetching failed:', error);
-
-            throw error;
-          });
-        }
-      }).catch(function(error) {
-        console.error('Fetching failed:', error);
-
-        throw error;
-      })
-
+        caches.open(swcache).then(function (cache) {
+          cache.put(event.request, responseClone);
+        });
+        return response;
+      }).catch(function () {
+        console.log('sw 404');
+        return;
+      });
     }
-    caches.match(e.request).then(function(response) {
-      return response || fetch(e.request);
-    })
-  );
-
+  }));
 });
