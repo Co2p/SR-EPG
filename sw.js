@@ -38,7 +38,7 @@ self.addEventListener('fetch', function(event) {
   if (event.request.url == 'static-cdn.sr.se') {
     console.log(event.request);
     event.respondWith(caches.match(event.request).then(function(response) {
-      if (event.request.url == 'static-cdn.sr.se') {
+      if (event.request.url.hostname == 'static-cdn.sr.se') {
         console.log('static');
         return fetch(event.request).then(function (response) {
           let responseClone = response.clone();
