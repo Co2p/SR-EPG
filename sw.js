@@ -42,8 +42,8 @@ self.addEventListener('fetch', function(event) {
       return fetch(event.request).then(function (response) {
         let responseClone = response.clone();
         caches.open(swcache).then(function (cache) {
-          console.log(response.clone());
           cache.put(event.request, responseClone);
+          console.log(responseClone);
         });
         return response;
       })
