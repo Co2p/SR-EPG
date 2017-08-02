@@ -4,7 +4,7 @@ let channels = [];
 let programs = {};
 let lokalaKanaler = [];
 const lokalKanal = "P4 Stockholm";
-$.getJSON(channelsURL, function(data) {
+getJSON(channelsURL, function(data) {
   for (var i in data.channels) {
     let channel = data.channels[i];
     if (channel.scheduleurl != undefined) {
@@ -32,7 +32,7 @@ $.getJSON(channelsURL, function(data) {
 });
 
 function build(channel) {
-  $.getJSON(channel.scheduleurl + "&format=json&pagination=false",function(data){
+  getJSON(channel.scheduleurl + "&format=json&pagination=false",function(data){
     api = data;
     content.append(channelTemplate(channel));
     const guide = $('.' + channel.id);
@@ -64,37 +64,6 @@ function build(channel) {
       guide.append(programTemplate(program));
     }
   });
-}
-
-function standardizeTime(NETtime) {
-  return new Date(parseInt(NETtime.split('(')[1].split(')')[0]));
-}
-
-function readableTime(time) {
-  return new Intl.DateTimeFormat(navigator.language, {hour: 'numeric', minute: 'numeric'}).format(time);
-}
-
-function makeSSL(link) {
-  if(link) {
-    return link.replace('http://', 'https://');
-  }
-  return;
-}
-
-function scrollToNow() {
-  $('body, html').animate({ scrollLeft: parseFloat($('.timeindicator').css('width'))}, 100).animate({scrollLeft: parseFloat($('.timeindicator').css('width')) + parseFloat($(window).width())/500 + 'px'}, 1000);
-}
-
-function disableScroll() {
-  $('body').css({'overflow':'hidden'});
-  $(document).bind('scroll',function () {
-    window.scrollTo(0,0);
-  });
-}
-
-function enableScroll() {
-  $(document).unbind('scroll');
-  $('body').css({'overflow':'visible'});
 }
 
 function programInfo(e) {
