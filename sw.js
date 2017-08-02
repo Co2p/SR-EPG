@@ -51,6 +51,7 @@ self.addEventListener('fetch', function(event) {
           cache.put(event.request, cresponse.clone());
           return cresponse;
         })
+        console.log('erm');
       });
     } else {
       return response || fetch(event.request);
