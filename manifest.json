@@ -19,6 +19,10 @@
     "src": "img/ic_touch.png",
     "type": "image/png",
     "sizes": "192x192"
+  },{
+    "src": "img/ic_big.png",
+    "type": "image/png",
+    "sizes": "512x512"
   }],
   "display": "standalone",
   "theme_color": "#0065bd",
