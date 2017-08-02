@@ -49,9 +49,9 @@ self.addEventListener('fetch', function(event) {
       caches.open(swcache).then(function (cache) {
         return fetch(event.request).then(function (cresponse) {
           cache.put(event.request, cresponse.clone());
+          response = cresponse;
           return cresponse;
         })
-        console.log('erm');
       });
     } else {
       return response || fetch(event.request);
