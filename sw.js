@@ -53,9 +53,8 @@ self.addEventListener('fetch', function(event) {
           return cresponse;
         })
       });
-    } else {
-      return response || fetch(event.request);
     }
+    return fetch(event.request);
   })
 );
 });
