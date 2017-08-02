@@ -33,6 +33,40 @@
   color: #c8d9f1;
 }
 
+/*channel colors*/
+.p1 {
+  background: #31a1bd;
+}
+
+.p2 {
+  background: #ff5a00;
+}
+
+.p3 {
+  background: #19a972;
+}
+
+.p4 {
+  background: #c31eaa;
+}
+
+.p5 {
+  background: #e0004d;
+}
+
+.p6 {
+  background: #0065bd;
+}
+
+.SR {
+  background: rgb(22, 66, 168);
+}
+
+.sisuradio {
+  background: #0065bd;
+}
+
+/*text colors*/
 .text-light {
   color: #c8d9f1;
 }

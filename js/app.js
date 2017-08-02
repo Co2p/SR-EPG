@@ -23,6 +23,7 @@ $.getJSON(channelsURL, function(data) {
         channels.push(channel);
 
         if (channel.scheduleurl != undefined && channel.name != 'Ekot sänder direkt') {
+          console.log('added: ' + channel.name);
           build(channel);
         }
       }
