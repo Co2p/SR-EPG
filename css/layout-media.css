@@ -24,6 +24,14 @@
     width: 4em;
   }
 
+  content {
+    margin-left: 5.5em;
+  }
+
+  .timebar {
+    margin-left: 5.5em;
+  }
+
   kanalicon p {
     visibility: hidden;
   }
