@@ -4,7 +4,7 @@ let channels = [];
 let programs = {};
 let lokalaKanaler = [];
 const lokalKanal = "P4 Stockholm";
-getJSON(channelsURL, function(data) {
+getJSON(channelsURL).then((data) => {
   for (var i in data.channels) {
     let channel = data.channels[i];
     if (channel.scheduleurl != undefined) {
@@ -32,7 +32,7 @@ getJSON(channelsURL, function(data) {
 });
 
 function build(channel) {
-  getJSON(channel.scheduleurl + "&format=json&pagination=false",function(data){
+  getJSON(channel.scheduleurl + "&format=json&pagination=false").then((data) => {
     api = data;
     content.append(channelTemplate(channel));
     const guide = $('.' + channel.id);
@@ -67,57 +67,57 @@ function build(channel) {
 }
 
 function programInfo(e) {
+  let program = $(e);
+  let programDetail = program.find('detail');
+  let programParent = program.parent();
   if ($('.program-info').length > 0) {
     enableScroll();
     let previous = $('.program-info');
     $('.fadedprogram').animate({opacity: '0.5'}, 500);
-    $(e).find('detail').hide();
+    programDetail.hide();
     previous.removeClass('program-info').css('position', '').css('z-index', 'inherit').fadeIn();
   } else {
     disableScroll();
-    if ($(e.parentElement).hasClass('fadedprogram')) {
-      $(e.parentElement).animate({opacity: 1}, 500);
-    }
-    let animationDone = false;
-    if ($(e).find('detail').length == 0) {
-      $.getJSON(episodeURL({'id': $(e.parentElement).attr('eid')})).then(function (data) {
-        console.log(data);
-        data.episode.imageurl = makeSSL(data.episode.imageurl);
-        $(e).append(programDetailTemplate(data.episode));
-        $(e).find('detail').hide();
-        if (animationDone) {
-          $(e).find('detail').fadeIn();
-        }
-      }).catch((err) => {
-        $.getJSON(programURL({'id': $(e.parentElement).attr('pid')})).then(function (data) {
-          console.log(data);
-          data.imageurl = makeSSL(data.programimage);
-          data.title = data.name;
-          data.description = data.program.description;
-          $(e).append(programDetailTemplate(data));
-          $(e).find('detail').hide();
-          if (animationDone) {
-            $(e).find('detail').fadeIn();
-          }
-        }).catch((err)=> {
-          console.log('404');
-          $(e).append(programDetailTemplate({'description': 'Ingen information'}));
-        });
-      });
-    }
-
     let offset = $(e).offset();
     $(e).css({
       position: 'fixed',
       top: offset.top,
       left: offset.left
     });
-    $(e).css('z-index', '1000');
-    $(e).toggleClass('program-info', 100);
-    $(e).animate({top: 0, left: 0}, 500).promise().done(() => {
-      $(e).find('detail').fadeIn();
+    program.css('z-index', '1000');
+    program.toggleClass('program-info', 100);
+    program.animate({top: 0, left: 0}, 500).promise().done(() => {
+      programDetail.fadeIn();
       animationDone = true;
     });
+    if (programParent.hasClass('fadedprogram')) {
+      programParent.animate({opacity: 1}, 500);
+    }
+    let animationDone = false;
+    if (programDetail.length == 0) {
+      getJSON(episodeURL({'id': $(e.parentElement).attr('eid')})).then(function (data) {
+        data.episode.imageurl = makeSSL(data.episode.imageurl);
+        program.append(programDetailTemplate(data.episode));
+        programDetail.hide();
+        if (animationDone) {
+          programDetail.fadeIn();
+        }
+      }).catch((err) => {
+        getJSON(programURL({'id': $(e.parentElement).attr('pid')})).then(function (data) {
+          data.imageurl = makeSSL(data.programimage);
+          data.title = data.name;
+          data.description = data.program.description;
+          program.append(programDetailTemplate(data));
+          programDetail.hide();
+          if (animationDone) {
+            programDetail.fadeIn();
+          }
+        }).catch((err)=> {
+          console.log('404');
+          program.append(programDetailTemplate({'description': 'Ingen information tillgänglig'}));
+        });
+      });
+    }
   }
 }
 
