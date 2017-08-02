@@ -75,7 +75,10 @@ function readableTime(time) {
 }
 
 function makeSSL(link) {
-  return link.replace('http://', 'https://');
+  if(link) {
+    return link.replace('http://', 'https://');
+  }
+  return;
 }
 
 function scrollToNow() {
