@@ -81,18 +81,20 @@ function programInfo(e) {
     let previous = $('.program-info');
     $('.fadedprogram').animate({opacity: '0.5'}, 500);
     programDetail.hide();
-    previous.animate({top: animationPos.top, left: animationPos.left}, 500).promise().done(() => {
+    previous.animate({top: animationPos.top, left: animationPos.left}, 0).promise().done(() => {
       previous.removeClass('program-info').css('position', '').css('z-index', 'inherit').fadeIn();
     });
   } else {
     disableScroll();
-    animationPos = $(e).offset();
+    animationPos.left = $(e).parent().css('left');
+    animationPos.top = $(e).parent().css('top');
     $(e).css({
       position: 'fixed',
       'z-index': 1000,
       top: animationPos.top,
       left: animationPos.left
     });
+    console.log(animationPos);
     let animationDone = false;
     if (programParent.hasClass('fadedprogram')) {
       programParent.animate({opacity: 1}, 100);
