@@ -1,3 +1,5 @@
+const dayWidth = 864; // in em 
+
 function getJSON(url) {
   return new Promise((success, error) => {
     var request = new XMLHttpRequest();
@@ -46,4 +48,8 @@ function disableScroll() {
 function enableScroll() {
   $(document).unbind('scroll');
   $('body').css({'overflow':'visible'});
+}
+
+function timeToEM(time) {
+  return time / 100000
 }

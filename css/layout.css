@@ -85,6 +85,11 @@ kanalicon img:hover{
 kanal {
   display: flex;
   flex-direction: row;
+  height: 4.3em;
+}
+
+program {
+  position: absolute;
 }
 
 program:hover {
@@ -181,6 +186,7 @@ timetext {
   top: 0;
   bottom: 0;
   border-right: 5px solid rgba(255, 0, 0, 0.5);
+  z-index: 1;
 }
 
 .fadedprogram {

@@ -4,32 +4,35 @@ let channels = [];
 let programs = {};
 let lokalaKanaler = [];
 const lokalKanal = "P4 Stockholm";
-getJSON(channelsURL).then((data) => {
-  for (var i in data.channels) {
-    let channel = data.channels[i];
-    if (channel.scheduleurl != undefined) {
-      //setup a searchable JSON
-      if (channel.name.match("(!?P4).")) {
-        lokalaKanaler.push(channel.name);
-      }
-      if (!channel.name.match("(?:P4).+") || channel.name.match(lokalKanal)) {
-        channel.name = channel.name;
-        channel.id = channel.id;
-        channel.channeltype = channel.channeltype;
-        channel.scheduleurl = makeSSL(channel.scheduleurl);
-        channel.liveaudio.url = makeSSL(channel.liveaudio.url);
-        channel.color = "#" + channel.color;
-        channel.image = makeSSL(channel.image);
-        channels.push(channel);
+function init() {
+  content.empty();
+  getJSON(channelsURL).then((data) => {
+    for (var i in data.channels) {
+      let channel = data.channels[i];
+      if (channel.scheduleurl != undefined) {
+        //setup a searchable JSON
+        if (channel.name.match("(!?P4).")) {
+          lokalaKanaler.push(channel.name);
+        }
+        if (!channel.name.match("(?:P4).+") || channel.name.match(lokalKanal)) {
+          channel.name = channel.name;
+          channel.id = channel.id;
+          channel.channeltype = channel.channeltype;
+          channel.scheduleurl = makeSSL(channel.scheduleurl);
+          channel.liveaudio.url = makeSSL(channel.liveaudio.url);
+          channel.color = "#" + channel.color;
+          channel.image = makeSSL(channel.image);
+          channels.push(channel);
 
-        if (channel.scheduleurl != undefined && channel.name != 'Ekot sänder direkt') {
-          console.log('added: ' + channel.name);
-          build(channel);
+          if (channel.scheduleurl != undefined && channel.name != 'Ekot sänder direkt') {
+            console.log('added: ' + channel.name);
+            build(channel);
+          }
         }
       }
     }
-  }
-});
+  });
+}
 
 function build(channel) {
   getJSON(channel.scheduleurl + "&format=json&pagination=false").then((data) => {
@@ -51,8 +54,9 @@ function build(channel) {
         program.fade = true;
       }
 
-      program.duration = (programEnd - programStart) / 100000;
+      program.duration = timeToEM(programEnd - programStart);
       program.channelcolor = color;
+      program.absolutePos = timeToEM(programStart - new Date().setHours(0,0,0,0));
       program.starttime = readableTime(programStart);
       program.endtime = readableTime(programEnd);
       if (program.title == "Ekonyheter" || program.title == "Dagens Eko ") {
@@ -66,6 +70,8 @@ function build(channel) {
   });
 }
 
+let animationPos = {top: 0, left: 0};
+
 function programInfo(e) {
   let program = $(e);
   let programDetail = program.find('detail');
@@ -75,25 +81,27 @@ function programInfo(e) {
     let previous = $('.program-info');
     $('.fadedprogram').animate({opacity: '0.5'}, 500);
     programDetail.hide();
-    previous.removeClass('program-info').css('position', '').css('z-index', 'inherit').fadeIn();
+    previous.animate({top: animationPos.top, left: animationPos.left}, 500).promise().done(() => {
+      previous.removeClass('program-info').css('position', '').css('z-index', 'inherit').fadeIn();
+    });
   } else {
     disableScroll();
-    let offset = $(e).offset();
+    animationPos = $(e).offset();
     $(e).css({
       position: 'fixed',
-      top: offset.top,
-      left: offset.left
+      'z-index': 1000,
+      top: animationPos.top,
+      left: animationPos.left
     });
-    program.css('z-index', '1000');
-    program.toggleClass('program-info', 100);
+    let animationDone = false;
+    if (programParent.hasClass('fadedprogram')) {
+      programParent.animate({opacity: 1}, 100);
+    }
+    program.addClass('program-info');
     program.animate({top: 0, left: 0}, 500).promise().done(() => {
       programDetail.fadeIn();
       animationDone = true;
     });
-    if (programParent.hasClass('fadedprogram')) {
-      programParent.animate({opacity: 1}, 500);
-    }
-    let animationDone = false;
     if (programDetail.length == 0) {
       getJSON(episodeURL({'id': $(e.parentElement).attr('eid')})).then(function (data) {
         data.episode.imageurl = makeSSL(data.episode.imageurl);
@@ -121,14 +129,21 @@ function programInfo(e) {
   }
 }
 
+init();
 var d = new Date(), e = new Date(d);
 var msSinceMidnight = e - d.setHours(0,0,0,0);
 content.append('<div class="timeindicator" style=";width:' + msSinceMidnight / 100000 + 'em;"></div>');
 scrollToNow();
 
+let lastmsSM;
+
 setInterval(function() {
   var d = new Date(), e = new Date(d);
   var msSinceMidnight = e - d.setHours(0,0,0,0);
+  if (msSinceMidnight < lastmsSM) {
+    init();
+  }
+  lastmsSM = msSinceMidnight;
   $('.timeindicator').css('width', msSinceMidnight / 100000 + 'em');
 
   $('.fadedprogram').promise().done(function (faded) {
@@ -149,7 +164,6 @@ window.addEventListener('beforeinstallprompt', function(e) {
   // beforeinstallprompt Event fired
 
   // e.userChoice will return a Promise.
-  // For more details read: https://developers.google.com/web/fundamentals/getting-started/primers/promises
   e.userChoice.then(function(choiceResult) {
 
     console.log(choiceResult.outcome);
@@ -159,6 +173,7 @@ window.addEventListener('beforeinstallprompt', function(e) {
     }
     else {
       console.log('User added to home screen');
+
     }
   });
 });
