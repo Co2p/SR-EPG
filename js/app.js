@@ -162,18 +162,16 @@ setInterval(function() {
 
 window.addEventListener('beforeinstallprompt', function(e) {
   // beforeinstallprompt Event fired
-
+  if(Cookie.get('installed')) {
+    e.preventDefault();
+  }
   // e.userChoice will return a Promise.
   e.userChoice.then(function(choiceResult) {
-
-    console.log(choiceResult.outcome);
-
     if(choiceResult.outcome == 'dismissed') {
-      console.log('User cancelled home screen install');
+      Cookie.set('installed', 'true');
     }
     else {
-      console.log('User added to home screen');
-
+      Cookie.set('installed', 'true');
     }
   });
 });
