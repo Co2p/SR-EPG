@@ -25,7 +25,6 @@ function init() {
           channels.push(channel);
 
           if (channel.scheduleurl != undefined && channel.name != 'Ekot sänder direkt') {
-            console.log('added: ' + channel.name);
             build(channel);
           }
         }
@@ -94,7 +93,6 @@ function programInfo(e) {
       top: animationPos.top,
       left: animationPos.left
     });
-    console.log(animationPos);
     let animationDone = false;
     if (programParent.hasClass('fadedprogram')) {
       programParent.animate({opacity: 1}, 100);
@@ -152,11 +150,9 @@ setInterval(function() {
     const currTime = readableTime(new Date());
     for (var i = 0; faded.length > i; i++) {
       if (currTime >= $(faded[i]).find('.starttime').text()) {
-        console.log($(faded[i]).find('.starttime').text());
         $(faded[i]).css('opacity', 0.5);
         $(faded[i]).removeClass('fadedprogram');
         $(faded[i]).animate({opacity: 1}, 500)
-        console.log('de-faded');
       }
     }
   });
