@@ -7,7 +7,7 @@ $('div').on('click', (e) => {
     streamid = $(e.target.parentElement.parentElement).attr('id');
 
     if (playing != streamid) {
-      e.target.src = '/img/pause.svg';
+      e.target.src = 'img/pause.svg';
       let audiourl = liveAudioURL({id: streamid});
       myAudio.setAttribute('src',audiourl);
 
@@ -17,7 +17,7 @@ $('div').on('click', (e) => {
       });
 
     } else {
-      e.target.src = '/img/play.svg';
+      e.target.src = 'img/play.svg';
       myAudio.pause();
       playing = 0;
     }
