@@ -1,4 +1,4 @@
-const dayWidth = 864; // in em 
+const dayWidth = 864; // in em
 
 function getJSON(url) {
   return new Promise((success, error) => {
@@ -51,5 +51,5 @@ function enableScroll() {
 }
 
 function timeToEM(time) {
-  return time / 100000
+  return time / 100000;
 }

@@ -2,7 +2,7 @@ const programTemplatePics = Handlebars.compile('<program style="width: {{duratio
 const programTemplate = Handlebars.compile('<program eid="{{episodeid}}" pid="{{program.id}}" style="width:{{duration}}em;left:{{absolutePos}}em;" {{#if fade}}class="fadedprogram"{{/if}}><div href="#" onclick="programInfo(this);return false;" title="{{program.name}}" style="background: {{channelcolor}};"><p>{{title}}</p><timetext class="starttime text-light">{{starttime}}</timetext><timetext class="endtime text-light"> - {{endtime}}</timetext></div></program>');
 const programDetailTemplate = Handlebars.compile('<detail>{{#if imageurl}}<img alt="{{title}}" src="{{imageurl}}"/>{{/if}}<p>{{title}}</p><description>{{description}}</description><text>{{text}}</text></detail>')
 const channelTemplate = Handlebars.compile('<kanal class="{{id}}"></kanal>');
-const channelIconTemplate = Handlebars.compile('<kanalicon title="{{name}}" id="{{id}}" class="text-light"><p>{{name}}</p><img class="icon" href="#" onclick="liveaudio(this);return false;" src="{{image}}"></img></kanalicon>')
+const channelIconTemplate = Handlebars.compile('<kanalicon title="{{name}}" id="{{id}}" class="text-light"><p>{{name}}</p><div class="liveradio"><img class="playing" src="/img/play.svg"/><img class="icon" href="#" src="{{image}}"/></div></kanalicon>')
 
 const channelsURL = 'https://api.sr.se/api/v2/channels?format=json&pagination=false';
 const liveAudioURL = Handlebars.compile('https://sverigesradio.se/topsy/direkt/{{id}}.mp3');

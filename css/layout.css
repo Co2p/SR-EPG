@@ -58,7 +58,7 @@ kanalicon {
   display: flex;
   flex-direction: row;
   left: 0px;
-  margin-bottom: 1.3em;
+  margin-bottom: .92em;
   justify-content: flex-end;
   width: 10em;
   z-index: 999;
@@ -67,19 +67,29 @@ kanalicon {
 kanalicon p {
   margin: 0;
   align-self: center;
+  margin-right: 0.5em;
 }
 
-kanalicon img {
+kanalicon .icon{
   height: 3em;
-  margin-left: 0.5em;
+  width: 3em;
 }
 
-kanalicon img:hover{
-  opacity: 0.5;
+kanalicon .icon{
+  height: 3em;
+  width: 3em;
 }
 
 .playing {
-  visibility: hidden;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  height: 2em;
+  padding: 0.5em;
+}
+
+.playing:hover {
+  opacity: 1;
 }
 
 kanal {

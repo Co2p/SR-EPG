@@ -1,23 +1,25 @@
-let playing;
 
-function liveaudio(e) {
-  return; //safeguard non ready feature
-  let audiourl = liveAudioURL({id: $(e.parentElement).attr('id')});
-  let myAudio = document.getElementsByTagName('audio')
-  if ($('audio').length == 0) {
-    myAudio = document.createElement('audio');
-    $('audio').data('id', $(e.parentElement).attr('id'));
+let myAudio = document.createElement('audio');
+var playing = 0;
+
+$('div').on('click', (e) => {
+  if (e.target.className == "playing") {
+    streamid = $(e.target.parentElement.parentElement).attr('id');
+
+    if (playing != streamid) {
+      e.target.src = '/img/pause.svg';
+      let audiourl = liveAudioURL({id: streamid});
+      myAudio.setAttribute('src',audiourl);
+
+      myAudio.play();
+      myAudio.addEventListener('playing', (e) => {
+        playing = streamid;
+      });
+
+    } else {
+      e.target.src = '/img/play.svg';
+      myAudio.pause();
+      playing = 0;
+    }
   }
-
-  if (myAudio.canPlayType('audio/mpeg')) {
-    myAudio.setAttribute('src',audiourl);
-  } else if (myAudio.canPlayType('audio/ogg')) {
-    console.log('oh my ogg');
-  }
-
-  myAudio.play();
-  myAudio.addEventListener('playing', (e) => {
-    playing = $('audio').attr('id');
-    console.log($(e.target.id));
-  });
-}
+})
