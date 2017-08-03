@@ -1,4 +1,4 @@
-const version = '0.2.3';
+const version = '0.2.4';
 const swcache = 'SREPG' + version;
 self.addEventListener('install', (e) => {
   //console.log('WORKER: install event in progress.');
@@ -10,6 +10,8 @@ self.addEventListener('install', (e) => {
         '/SR-EPG/img/ic_fav.png',
         '/SR-EPG/img/info.svg',
         '/SR-EPG/img/playhead.svg',
+        '/SR-EPG/img/play.svg',
+        '/SR-EPG/img/pause.svg',
         '/SR-EPG/js/templates.js',
         '/SR-EPG/js/app.js',
         '/SR-EPG/js/audio.js',
