@@ -1,6 +1,7 @@
 const dayWidth = 864; // in em
 
 function getJSON(url) {
+  url = makeSSL(url);
   return new Promise((success, error) => {
     var request = new XMLHttpRequest();
     request.open('GET', url, true);
