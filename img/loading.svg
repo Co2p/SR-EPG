@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512px" height="512px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>loading</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="loading" fill="#FFFFFF">
+            <path d="M255.5,511 C396.608754,511 511,396.608754 511,255.5 C511,114.391246 396.608754,0 255.5,0 C114.391246,0 3.33066907e-15,114.391246 3.33066907e-15,255.5 C3.33066907e-15,396.608754 114.391246,511 255.5,511 Z M255.5,490.5 C385.286916,490.5 490.5,385.286916 490.5,255.5 C490.5,125.713084 385.286916,20.5 255.5,20.5 C125.713084,20.5 20.5,125.713084 20.5,255.5 C20.5,385.286916 125.713084,490.5 255.5,490.5 Z" id="Combined-Shape"></path>
+            <g id="Group" transform="translate(105.000000, 220.000000)">
+                <rect id="Rectangle" x="230" y="0" width="72" height="72" rx="36"></rect>
+                <rect id="Rectangle-Copy" x="115" y="0" width="72" height="72" rx="36"></rect>
+                <rect id="Rectangle-Copy-2" x="0" y="0" width="72" height="72" rx="36"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

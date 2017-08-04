@@ -12,6 +12,7 @@ self.addEventListener('install', (e) => {
         '/SR-EPG/img/playhead.svg',
         '/SR-EPG/img/play.svg',
         '/SR-EPG/img/pause.svg',
+        '/SR-EPG/img/loading.svg',
         '/SR-EPG/js/templates.js',
         '/SR-EPG/js/app.js',
         '/SR-EPG/js/audio.js',

@@ -1,24 +1,35 @@
-
-let myAudio = document.createElement('audio');
 var playing = 0;
 
 $('div').on('click', (e) => {
   if (e.target.className == "playing") {
     streamid = $(e.target.parentElement.parentElement).attr('id');
+    $('.playing').attr('src','/img/play.svg');
 
     if (playing != streamid) {
-      e.target.src = 'img/pause.svg';
-      let audiourl = liveAudioURL({id: streamid});
-      myAudio.setAttribute('src',audiourl);
+      let audio = $('audio');
+      if (playing != 0) {
+        audio[0].pause();
+        audio[0].src = $('audio')[0].src; //stops stream
+      }
 
-      myAudio.play();
-      myAudio.addEventListener('playing', (e) => {
+      let player = e.target;
+      let audiourl = liveAudioURL({id: streamid});
+      audio[0].src = audio.src; //stops stream
+
+      audio[0].src = audiourl;
+      player.src = 'img/loading.svg';
+
+      audio[0].play();
+      audio[0].addEventListener('playing', function handler(e) {
         playing = streamid;
+        player.src = 'img/pause.svg';
+        audio[0].removeEventListener('playing', handler);
       });
 
     } else {
-      e.target.src = 'img/play.svg';
-      myAudio.pause();
+      let audio = $('audio');
+      audio[0].pause();
+      audio[0].src = audio[0].src; //stops stream
       playing = 0;
     }
   }
