@@ -27,7 +27,7 @@
     <h>Sveriges Radio EPG</h>
     <div>
       <img title="Scrolla till det som sänds nu" onclick="scrollToNow();return;" src="img/playhead.svg"/>
-      <img src="img/info.svg"/>
+      <img class="info" src="img/info.svg"/>
     </div>
   </nav>
   <div class="timebar daywidth"></div>
@@ -35,6 +35,7 @@
   <content></content>
   <footer></footer>
   <audio></audio>
+  <div class="dark modal" style="visibility: hidden;"></div>
   <script defer src="js/lib/js.cookie.js"></script>
   <script src="js/helpers.js"></script>
   <script src="js/templates.js"></script>

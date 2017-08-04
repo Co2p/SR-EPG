@@ -82,7 +82,7 @@ function programInfo(e) {
     $('.fadedprogram').animate({opacity: '0.5'}, 500);
     programDetail.hide();
     previous.animate({top: animationPos.top, left: animationPos.left}, 0).promise().done(() => {
-      previous.removeClass('program-info').css('position', '').css('z-index', 'inherit').fadeIn();
+      previous.removeClass('program-info').css('position', '').css('z-index', '').fadeIn();
     });
   } else {
     disableScroll();
@@ -161,16 +161,5 @@ setInterval(function() {
 
 window.addEventListener('beforeinstallprompt', function(e) {
   // beforeinstallprompt Event fired
-  if(Cookie.get('installed')) {
-    e.preventDefault();
-  }
-  // e.userChoice will return a Promise.
-  e.userChoice.then(function(choiceResult) {
-    if(choiceResult.outcome == 'dismissed') {
-      Cookie.set('installed', 'true');
-    }
-    else {
-      Cookie.set('installed', 'true');
-    }
-  });
+  e.preventDefault();
 });
