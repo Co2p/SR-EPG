@@ -3,7 +3,7 @@ var playing = 0;
 $('div').on('click', (e) => {
   if (e.target.className == "playing") {
     streamid = $(e.target.parentElement.parentElement).attr('id');
-    $('.playing').attr('src','/img/play.svg');
+    $('.playing').attr('src','img/play.svg');
 
     if (playing != streamid) {
       let audio = $('audio');
