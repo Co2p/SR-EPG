@@ -29,7 +29,7 @@ $('div').on('click', (e) => {
     } else {
       let audio = $('audio');
       audio[0].pause();
-      audio[0].src = audio[0].src; //stops stream
+      audio[0].src = '#'; //stops stream
       playing = 0;
     }
   }
