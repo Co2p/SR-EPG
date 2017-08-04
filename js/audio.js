@@ -4,6 +4,7 @@ $('div').on('click', (e) => {
   if (e.target.className == "playing") {
     streamid = $(e.target.parentElement.parentElement).attr('id');
     $('.playing').attr('src','img/play.svg');
+    $('.playing').css('opacity', '');
 
     if (playing != streamid) {
       let audio = $('audio');
@@ -18,7 +19,7 @@ $('div').on('click', (e) => {
 
       audio[0].src = audiourl;
       player.src = 'img/loading.svg';
-
+      player.style.opacity = 1;
       audio[0].play();
       audio[0].addEventListener('playing', function handler(e) {
         playing = streamid;
@@ -33,4 +34,4 @@ $('div').on('click', (e) => {
       playing = 0;
     }
   }
-})
+});

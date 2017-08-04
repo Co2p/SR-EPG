@@ -32,6 +32,10 @@
     margin-left: 5.5em;
   }
 
+  .playing {
+    opacity: 1;
+  }
+
   kanalicon p {
     visibility: hidden;
   }

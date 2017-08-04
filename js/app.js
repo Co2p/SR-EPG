@@ -1,5 +1,7 @@
 const content = $('content');
 const sidebar = $('.sidebar');
+const blockheight = 4.5; //the height of the graphical emisode representations in em
+let contentHeight;
 let channels = [];
 let programs = {};
 let lokalaKanaler = [];
@@ -18,13 +20,16 @@ function init() {
         if (!channel.name.match("(?:P4).+") || channel.name.match(lokalKanal)) {
           channel.name = channel.name;
           channel.id = channel.id;
+          channel.topOffset = channels.length * blockheight;
           channel.channeltype = channel.channeltype;
           channel.scheduleurl = makeSSL(channel.scheduleurl);
           channel.liveaudio.url = makeSSL(channel.liveaudio.url);
           channel.color = "#" + channel.color;
-          channel.image = makeSSL(channel.image);
+          channel.image = webpOrSSl(channel.image);
+          contentHeight = channels.length * blockheight;
+          sidebar.css('height', contentHeight + 'em');
+          $('.timeindicator').css('height', contentHeight + 'em');
           channels.push(channel);
-
           if (channel.scheduleurl != undefined && channel.name != 'Ekot sänder direkt') {
             build(channel);
           }
@@ -38,7 +43,7 @@ function build(channel) {
   getJSON(channel.scheduleurl + "&format=json&pagination=false").then((data) => {
     api = data;
     content.append(channelTemplate(channel));
-    const guide = $('.' + channel.id);
+    const guide = $('#' + channel.id);
     let timeNow = new Date();
     sidebar.append(channelIconTemplate(channel));
 

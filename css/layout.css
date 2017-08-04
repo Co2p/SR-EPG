@@ -55,6 +55,7 @@ content {
 }
 
 kanalicon {
+  position: absolute;
   display: flex;
   flex-direction: row;
   left: 0px;
@@ -93,9 +94,7 @@ kanalicon .icon{
 }
 
 kanal {
-  display: flex;
-  flex-direction: row;
-  height: 4.3em;
+  position: absolute;
 }
 
 program {
