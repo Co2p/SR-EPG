@@ -20,14 +20,14 @@ function getJSON(url) {
   })
 }
 
-function webpOrSSl(url) {
+/*function getWebp(url) {
   let id = url.split('/')[5];
   if (id == 132 || id == 163 || id == 164 || id == 701) {
     return 'img/' + id + '.webp';
   } else {
-    return makeSSL(url);
+    return;
   }
-}
+}*/
 
 function standardizeTime(NETtime) {
   return new Date(parseInt(NETtime.split('(')[1].split(')')[0]));

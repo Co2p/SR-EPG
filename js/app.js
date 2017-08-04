@@ -25,7 +25,7 @@ function init() {
           channel.scheduleurl = makeSSL(channel.scheduleurl);
           channel.liveaudio.url = makeSSL(channel.liveaudio.url);
           channel.color = "#" + channel.color;
-          channel.image = webpOrSSl(channel.image);
+          channel.image = makeSSL(channel.image);
           contentHeight = channels.length * blockheight;
           sidebar.css('height', contentHeight + 'em');
           $('.timeindicator').css('height', contentHeight + 'em');
