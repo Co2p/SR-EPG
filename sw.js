@@ -1,4 +1,4 @@
-const version = '0.2.4';
+const version = '0.2.5';
 const swcache = 'SREPG' + version;
 self.addEventListener('install', (e) => {
   //console.log('WORKER: install event in progress.');
