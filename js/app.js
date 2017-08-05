@@ -9,6 +9,7 @@ const lokalKanal = "P4 Stockholm";
 function init() {
   sidebar.empty();
   content.empty();
+  channels = [];
   getJSON(channelsURL).then((data) => {
     for (var i in data.channels) {
       let channel = data.channels[i];
