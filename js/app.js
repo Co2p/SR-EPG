@@ -1,6 +1,8 @@
 const content = $('content');
 const sidebar = $('.sidebar');
 const blockheight = 4.5; //the height of the graphical emisode representations in em
+let animationPos = {top: 0, left: 0};
+let lastmsSM;
 let contentHeight;
 let channels = [];
 let programs = {};
@@ -10,6 +12,10 @@ function init() {
   sidebar.empty();
   content.empty();
   channels = [];
+  var d = new Date(), e = new Date(d);
+  var msSinceMidnight = e - d.setHours(0,0,0,0);
+  content.append('<div class="timeindicator" style=";width:' + msSinceMidnight / 100000 + 'em;"></div>');
+  scrollToNow();
   getJSON(channelsURL).then((data) => {
     for (var i in data.channels) {
       let channel = data.channels[i];
@@ -76,7 +82,6 @@ function build(channel) {
   });
 }
 
-let animationPos = {top: 0, left: 0};
 
 function programInfo(e) {
   let program = $(e);
@@ -137,12 +142,6 @@ function programInfo(e) {
 }
 
 init();
-var d = new Date(), e = new Date(d);
-var msSinceMidnight = e - d.setHours(0,0,0,0);
-content.append('<div class="timeindicator" style=";width:' + msSinceMidnight / 100000 + 'em;"></div>');
-scrollToNow();
-
-let lastmsSM;
 
 setInterval(function() {
   var d = new Date(), e = new Date(d);
