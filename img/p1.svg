@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="273px" height="191px" viewBox="0 0 273 191" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>p1</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0.06 190.935007 273.250002 190.935007 273.250002 0.115 0.06 0.115"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="p1">
+            <g id="132">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <path d="M110.881,62.352 C110.881,105.985 84.198,111.213 84.198,111.213 L119.837,111.213 C123.272,111.213 183.175,113.614 183.175,55.672 C183.175,-2.273 123.272,0.129 119.837,0.129 L84.198,0.129 C84.198,0.129 110.881,5.358 110.881,48.992 L110.881,62.352" id="Fill-1" fill="#FFFFFF" mask="url(#mask-2)"></path>
+                <polyline id="Fill-3" fill="#FFFFFF" mask="url(#mask-2)" points="273.248 191 273.248 0.129 241.535 0.129 203.363 66.059 203.363 191 273.248 191"></polyline>
+                <path d="M0,0.129 L0,191 L66.189,191 C66.188,191 66.188,132.49 66.188,132.49 C66.188,132.49 66.188,0.129 66.189,0.129 L0,0.129" id="Fill-4" fill="#FFFFFF" mask="url(#mask-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

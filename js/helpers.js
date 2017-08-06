@@ -20,14 +20,20 @@ function getJSON(url) {
   })
 }
 
-/*function getWebp(url) {
+function getVector(url) {
   let id = url.split('/')[5];
-  if (id == 132 || id == 163 || id == 164 || id == 701) {
-    return 'img/' + id + '.webp';
+  if (id == 132) {
+    return 'img/p1.svg';
+  } else if (id == 163 || id == 2562) {
+    return 'img/p2.svg';
+  } else if (id == 164) {
+    return 'img/p3.svg';
+  } else if (id == 701) {
+    return 'img/p4.svg';
   } else {
-    return;
+    return makeSSL(url);
   }
-}*/
+}
 
 function standardizeTime(NETtime) {
   return new Date(parseInt(NETtime.split('(')[1].split(')')[0]));
