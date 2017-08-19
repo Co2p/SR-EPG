@@ -1,4 +1,9 @@
 const dayWidth = 864; // in em
+const p1colors = ['#32CDD7', '#7CDED5', '#6EB4CD'];
+const p2colors = ['#FF5A00', '#E70F47', '#F4AF00'];
+const p3colors = ['#00C88C', '#C4E4A5', '#70D551'];
+const p4colors = ['#C31EAA', '#C2AFE6', '#1C29A7'];
+const othercolors = ['#0065bd'];
 
 function getJSON(url) {
   url = makeSSL(url);
@@ -20,19 +25,47 @@ function getJSON(url) {
   })
 }
 
+function channelSwitch(id, p1, p2, p3, p4, otherwise) {
+  if (id == 132) {
+    return p1();
+  } else if (id == 163 || id == 2562) {
+    return p2();
+  } else if (id == 164) {
+    return p3();
+  } else if (id == 701) {
+    return p4();
+  } else {
+    return otherwise();
+  }
+}
+
+function colorGenerator(id, defaultColor) {
+  return channelSwitch(id, ()=>{
+    return p1colors[0];
+  }, () =>{
+    return p2colors[0];
+  }, ()=>{
+    return p3colors[0];
+  }, ()=>{
+    return p4colors[0];
+  },()=>{
+    return defaultColor;
+  });
+}
+
 function getVector(url) {
   let id = url.split('/')[5];
-  if (id == 132) {
+  return channelSwitch(id, ()=>{
     return 'img/p1.svg';
-  } else if (id == 163 || id == 2562) {
+  }, () =>{
     return 'img/p2.svg';
-  } else if (id == 164) {
+  }, ()=>{
     return 'img/p3.svg';
-  } else if (id == 701) {
+  }, ()=>{
     return 'img/p4.svg';
-  } else {
+  },()=>{
     return makeSSL(url);
-  }
+  });
 }
 
 function standardizeTime(NETtime) {
