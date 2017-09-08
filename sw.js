@@ -1,28 +1,29 @@
-const version = '0.2.6';
+const version = '0.2.7';
 const swcache = 'SREPG' + version;
 self.addEventListener('install', (e) => {
   //console.log('WORKER: install event in progress.');
   e.waitUntil(
     caches.open(swcache).then(function(cache) {
       return cache.addAll([
-        '/SR-EPG/css/color.css',
-        '/SR-EPG/css/layout.css',
-        '/SR-EPG/img/ic_fav.png',
-        '/SR-EPG/img/info.svg',
-        '/SR-EPG/img/playhead.svg',
-        '/SR-EPG/img/play.svg',
-        '/SR-EPG/img/pause.svg',
-        '/SR-EPG/img/loading.svg',
-        '/SR-EPG/img/p1.svg',
-        '/SR-EPG/img/p2.svg',
-        '/SR-EPG/img/p3.svg',
-        '/SR-EPG/img/p4.svg',
-        '/SR-EPG/js/templates.js',
-        '/SR-EPG/js/app.js',
-        '/SR-EPG/js/audio.js',
-        '/SR-EPG/js/lib/handlebars-v4.0.10.js',
-        '/SR-EPG/js/lib/jquery-ui.min.js',
-        '/SR-EPG/index.html'
+        '/radio/css/color.css',
+        '/radio/css/layout.css',
+        '/radio/img/ic_fav.png',
+        '/radio/img/info.svg',
+        '/radio/img/playhead.svg',
+        '/radio/img/play.svg',
+        '/radio/img/pause.svg',
+        '/radio/img/loading.svg',
+        '/radio/img/p1.svg',
+        '/radio/img/p2.svg',
+        '/radio/img/p3.svg',
+        '/radio/img/p4.svg',
+        '/radio/js/templates.min.js',
+        '/radio/js/helpers.min.js',
+        '/radio/js/app.min.js',
+        '/radio/js/audio.min.js',
+        '/radio/js/lib/jquery-3.2.1.min.js',
+        '/radio/js/lib/jquery-ui.min.js',
+        '/radio/index.html'
       ]);
     }).then(()=> {
       console.log('WORKER: install ' + version +' completed');

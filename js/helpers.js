@@ -39,7 +39,7 @@ function channelSwitch(id, p1, p2, p3, p4, otherwise) {
   }
 }
 
-function colorGenerator(id, defaultColor) {
+function getChannelColor(id, defaultColor) {
   return channelSwitch(id, ()=>{
     return p1colors[0];
   }, () =>{
