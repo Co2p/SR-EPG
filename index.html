@@ -34,7 +34,7 @@
   <div class="sidebar dark-transparent"></div>
   <content></content>
   <footer></footer>
-  <audio src="#"></audio>
+  <audio src="#" preload="none"></audio>
   <div class="dark modal" style="visibility: hidden;"></div>
   <script defer src="js/lib/js.cookie.js"></script>
   <script src="js/helpers.min.js"></script>
@@ -44,9 +44,13 @@
   <script defer src="js/lib/jquery-ui.min.js"></script>
   <script>
   if('serviceWorker' in navigator) {
-    navigator.serviceWorker.register("co2p.se/radio/sw.js").then(function (reg) {
+    navigator.serviceWorker.register("https://co2p.se/radio/sw.js").then(function (reg) {
       console.log('serviceWorker online');
     }).catch(function (err) {
+      navigator.serviceWorker.register("https://www.co2p.se/radio/sw.js").then(function (reg) {
+        console.log('serviceWorker online');
+      }).catch(function (err) {
+      });
     });
   }</script>
 </body>
