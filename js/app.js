@@ -133,7 +133,7 @@ function expandProgram(e) {
 function getProgramData(program) {
     let programDetail = program.find('detail');
     getJSON(episodeURL({'id': program.attr('eid')})).then(function (data) {
-        data.episode.imageurl = makeSSL(data.episode.imageurl);
+        data.episode.imageurl = data.episode.imageurl;
         program.find('div').append(programDetailTemplate(data.episode));
         programDetail.hide();
         if (modalAnimationDone) {
@@ -141,7 +141,7 @@ function getProgramData(program) {
         }
     }).catch((err) => {
         getJSON(programURL({'id': program.attr('pid')})).then(function (data) {
-            data.imageurl = makeSSL(data.programimage);
+            data.imageurl = data.programimage;
             data.title = data.name;
             data.description = data.program.description;
             program.find('div').append(programDetailTemplate(data));

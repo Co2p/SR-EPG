@@ -13,8 +13,8 @@ function programTemplate(d) {
 }
 
 function programDetailTemplate(d) {
-  let broadcast = d.broadcast? 'Originallängd: <audio src="' + d.broadcast.broadcastfiles[0].url + '" controls="true"/>': '';
-  let podd = d.listenpodfile? 'Podd: <audio src="' + d.listenpodfile.url + '" controls="true"/>': '';
+  let broadcast = d.broadcast? 'Originallängd: <audio src="' + d.broadcast.broadcastfiles[0].url + '" controls="true"/ preload="none">': '';
+  let podd = d.listenpodfile? 'Podd: <audio src="' + makeSSL(d.listenpodfile.url) + '" controls="true" preload="none"/>': '';
   let description = d.description? '<description>' + d.description + '</description>': '';
   let text = d.text? '<text>' + d.text + '</text>': '';
   return '<detail>' + image(d) + broadcast + podd + title(d.title) + description + text + '</detail>';
@@ -43,7 +43,7 @@ function liveAudioURL(d) {
 }
 
 function image(d) {
-  return d.imageurl? '<img alt="' + d.title + '" src="' + d.imageurl + '"/>': '';
+  return d.imageurl? '<img alt="' + d.title + '" src="' + makeSSL(d.imageurl) + '"/>': '';
 }
 
 function title(t) {
