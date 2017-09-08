@@ -1,12 +1,13 @@
 var playing = 0;
 let audio = $('audio');
+let player;
 
 $('div').on('click', (e) => {
   if (e.target.className == "playing") {
     streamid = $(e.target.parentElement.parentElement).attr('id');
     $('.playing').attr('src','img/play.svg');
     $('.playing').css('opacity', '');
-    let player = e.target;
+    player = e.target;
     audio[0].addEventListener('loadstart', function handler(e) {
       if (playing != 0) {
         player.src = 'img/loading.svg';
@@ -20,20 +21,20 @@ $('div').on('click', (e) => {
     });
     audio[0].addEventListener('pause', function handler(e) {
       player.src = 'img/play.svg';
-      playPause(streamid)
+      pause();
       audio[0].removeEventListener('pause', handler);
     });
-    playPause(streamid)
+    play(liveAudioURL({id: streamid}), streamid);
   }
 });
 
-function playPause(streamid) {
+function play(stream, streamid) {
   if (playing != streamid) {
     if (playing != 0) {
       audio[0].pause();
       audio[0].src = audio[0].src; //stops stream
     }
-    let audiourl = liveAudioURL({id: streamid});
+    let audiourl = stream;
     audio[0].src = audio.src; //stops stream
 
     audio[0].src = audiourl;
@@ -49,9 +50,13 @@ function playPause(streamid) {
     });
 
   } else {
+    pause();
+  }
+}
+
+function pause() {
     let audio = $('audio');
     audio[0].pause();
     audio[0].src = '#'; //stops stream
     playing = 0;
-  }
 }
