@@ -21,6 +21,8 @@ nav h {
   font-size: 1.2em;
   font-weight: bold;
   align-self: center;
+  white-space: nowrap;
+  cursor: pointer;
 }
 
 nav img {
@@ -29,6 +31,11 @@ nav img {
   cursor: pointer;
 }
 
+nav div {
+  display: flex;
+  position: absolute;
+  right: 1em;
+}
 
 content {
   margin: 6.4em 1em 0 11.5em; /*compensating for the fixed header*/
