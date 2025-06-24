@@ -25,6 +25,30 @@ $('div').on('click', (e) => {
       audio[0].removeEventListener('pause', handler);
     });
     play(liveAudioURL({id: streamid}), streamid);
+  } else if (e.target.className == "program-playing") {
+    // Handle program-level play controls
+    e.stopPropagation(); // Prevent expandProgram from being called
+    streamid = $(e.target).attr('data-channel-id');
+    $('.playing').attr('src','img/play.svg');
+    $('.playing').css('opacity', '');
+    $('.program-playing').attr('src','img/play.svg');
+    player = e.target;
+    audio[0].addEventListener('loadstart', function handler(e) {
+      if (playing != 0) {
+        player.src = 'img/loading.svg';
+      }
+      audio[0].removeEventListener('loadstart', handler);
+    });
+    audio[0].addEventListener('playing', function handler(e) {
+      player.src = 'img/pause.svg';
+      audio[0].removeEventListener('playing', handler);
+    });
+    audio[0].addEventListener('pause', function handler(e) {
+      player.src = 'img/play.svg';
+      pause();
+      audio[0].removeEventListener('pause', handler);
+    });
+    play(liveAudioURL({id: streamid}), streamid);
   }
 });
 

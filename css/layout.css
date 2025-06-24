@@ -89,6 +89,31 @@ kanalicon .icon{
   opacity: 1;
 }
 
+.program-player-controls {
+  position: absolute;
+  top: 50%;
+  right: 0.5em;
+  transform: translateY(-50%);
+  z-index: 100;
+  pointer-events: auto;
+}
+
+.program-playing {
+  height: 2em;
+  width: 2em;
+  padding: 0.3em;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.program-playing:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
 kanal {
   position: absolute;
 }

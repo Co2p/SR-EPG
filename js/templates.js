@@ -9,7 +9,16 @@ function programTemplate(d) {
   let faded = d.fade? 'class="fadedprogram"':'';
   let programStyles = 'eid="' + d.episodeid + '" pid="' + d.program.id + '" style="width:' + d.duration + 'em; left:' + d.absolutePos + 'em;" ' + faded;
   let time = '<timetext class="starttime text-light">' + d.starttime + '</timetext><timetext class="endtime text-light"> - ' + d.endtime + '</timetext>';
-  return '<program ' + programStyles + ' onclick="expandProgram(this);return false;"><div href="#' + d.episodeid + '" title="' + d.program.name + '" style="background: ' + d.programcolor + '; height:' + d.height + 'em;">' + title(d.title) + time + '</div></program>';
+  
+  // Add play controls for currently active programs
+  let playControls = '';
+  if (d.isActive && d.channelId) {
+    playControls = '<div class="program-player-controls" id="controls-' + d.channelId + '">' +
+                   '<img class="program-playing" src="img/play.svg" data-channel-id="' + d.channelId + '"/>' +
+                   '</div>';
+  }
+  
+  return '<program ' + programStyles + ' onclick="expandProgram(this);return false;"><div href="#' + d.episodeid + '" title="' + d.program.name + '" style="background: ' + d.programcolor + '; height:' + d.height + 'em;">' + title(d.title) + time + playControls + '</div></program>';
 }
 
 function programDetailTemplate(d) {

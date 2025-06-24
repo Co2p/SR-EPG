@@ -65,9 +65,16 @@ function build(channel) {
                 let program = api.schedule[j];
                 const programStart = standardizeTime(program.starttimeutc);
                 const programEnd = standardizeTime(program.endtimeutc);
+                const now = new Date();
 
                 if (programStart >= loadTime) {
                     program.fade = true;
+                }
+                
+                // Check if this program is currently active (running now)
+                if (programStart <= now && programEnd > now) {
+                    program.isActive = true;
+                    program.channelId = channel.id;
                 }
 
                 program.duration = timeToEM(programEnd - programStart);
